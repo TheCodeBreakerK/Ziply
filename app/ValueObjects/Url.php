@@ -1,6 +1,6 @@
 <?php
 
-namespace App\models;
+namespace App\ValueObjects;
 
 use http\Exception\InvalidArgumentException;
 

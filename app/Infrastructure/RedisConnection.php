@@ -1,6 +1,6 @@
 <?php
 
-namespace App\models;
+namespace App\Infrastructure;
 
 use Predis\Client as RedisClient;
 use RedisException;
