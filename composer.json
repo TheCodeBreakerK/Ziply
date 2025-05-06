@@ -1,0 +1,22 @@
+{
+    "name": "the-code-breaker-k/ziply",
+    "description": "High-performance URL shortener API using PHP and Redis for fast redirection and link tracking. Designed for simplicity and scalability.",
+    "type": "project",
+    "require": {
+        "predis/predis": "^2.3",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "TheCodeBreakerK",
+            "email": "kelvin20mso@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
