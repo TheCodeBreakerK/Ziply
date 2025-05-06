@@ -4,6 +4,7 @@
     "type": "project",
     "require": {
         "predis/predis": "^2.3",
+        "ext-redis": "*",
         "vlucas/phpdotenv": "^5.6"
     },
     "license": "MIT",
