@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'the-code-breaker-k/ziply',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'e9a3e681430dfb8c734011a42e09b4bf61ec560c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -65,9 +65,9 @@
             'dev_requirement' => false,
         ),
         'the-code-breaker-k/ziply' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'e9a3e681430dfb8c734011a42e09b4bf61ec560c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
