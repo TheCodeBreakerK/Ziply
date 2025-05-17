@@ -2,9 +2,10 @@
 
 namespace App\Domain\ValueObjects;
 
-use http\Exception\InvalidArgumentException;
+use App\Domain\Contracts\ValidatableValueObjectInterface;
+use App\Domain\Exceptions\InvalidUrlException;
 
-class Url
+class Url implements ValidatableValueObjectInterface
 {
     private const int MAX_URL_LENGTH = 2000;
     private string $value;
@@ -15,22 +16,34 @@ class Url
         $this->value = $url;
     }
 
-    public function validate(string $url): void
+    private function validate(string $url): void
     {
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
-            throw new InvalidArgumentException('Invalid URL format');
+        $trimmed = trim($url);
+
+        if (empty($trimmed)) {
+            throw new InvalidUrlException("URL cannot be empty.");
         }
 
-        if (!preg_match('/^https?:\/\//i', $url)) {
-            throw new InvalidArgumentException('Only HTTP and HTTPS protocols are allowed');
+        if (!filter_var($trimmed, FILTER_VALIDATE_URL)) {
+            throw new InvalidUrlException("URL format is invalid.");
         }
 
-        if (strlen($url) > self::MAX_URL_LENGTH) {
-            throw new InvalidArgumentException('URL exceeds maximum length of ' . self::MAX_URL_LENGTH . ' characters');
+        $scheme = parse_url($trimmed, PHP_URL_SCHEME);
+        if (!in_array(strtolower($scheme), ['http', 'https'])) {
+            throw new InvalidUrlException("Only HTTP and HTTPS protocols are allowed.");
+        }
+
+        if (strlen($trimmed) > self::MAX_URL_LENGTH) {
+            throw new InvalidUrlException("URL exceeds maximum length of " . self::MAX_URL_LENGTH . " characters.");
         }
     }
 
     public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    public function __toString(): string
     {
         return $this->value;
     }
