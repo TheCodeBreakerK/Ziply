@@ -38,14 +38,32 @@ class Shortener
         return new Url($url);
     }
 
+    public function getAllUrls(): array
+    {
+        $keys = $this->redis->keys(self::REDIS_KEY_PREFIX . '*');
+
+        $urls = [];
+        foreach ($keys as $key) {
+            $url = $this->redis->get(self::REDIS_KEY_PREFIX, '', $key);
+            $urls = [
+                'key' => $key,
+                'url' => $url
+            ];
+        }
+
+        return $urls;
+    }
+
     public function getExpirationTime(string $key): int
     {
-        return $this->redis->ttl(self::REDIS_KEY_PREFIX . $key);
+        $key = str_replace(self::REDIS_KEY_PREFIX, '', $key);
+        return $this->redis->ttl($key);
     }
 
     public function updateExpirationTime(string $key, int $newTTL): void
     {
-        $this->redis->expire(self::REDIS_KEY_PREFIX . $key, $newTTL);
+        $key = str_replace(self::REDIS_KEY_PREFIX, '', $key);
+        $this->redis->expire($key, $newTTL);
     }
 
     private function generateUniqueKey(): string
