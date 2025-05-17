@@ -3,7 +3,7 @@
 namespace App\Infrastructure;
 
 use Predis\Client as RedisClient;
-use RedisException;
+use App\Infrastructure\Exceptions\RedisConnectionException;
 
 class RedisConnection
 {
@@ -15,8 +15,8 @@ class RedisConnection
         $redisConfig = require_once __DIR__ . "/../../config/redis.php";
         try {
             $this->redis = new RedisClient(...$redisConfig);
-        } catch (RedisException $e) {
-            throw new RedisException('Redis connection failure: ' . $e->getMessage());
+        } catch (RedisConnectionException $e) {
+            throw new RedisConnectionException('Redis connection failure: ' . $e->getMessage());
         }
     }
 
